@@ -5,9 +5,10 @@ const News = () => {
   const [articles, setArticles] = useState([]);
 
   useEffect(() => {
-    fetch('https://newsapi.org/v2/top-headlines?country=us&apiKey=YOUR_API_KEY')
+    fetch('http://localhost:3001/api/news')
       .then(response => response.json())
-      .then(data => setArticles(data.articles));
+      .then(data => setArticles(data.articles))
+      .catch(error => console.error('Error fetching the news:', error)); // Added error handling
   }, []);
 
   return (

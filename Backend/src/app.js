@@ -3,6 +3,7 @@ const cors = require('cors');
 const mongoose = require('mongoose');
 const dotenv = require('dotenv');
 const authRoutes = require('./routes/authRoutes');
+const newsRouter = require('./routes/newsRouter'); 
 
 dotenv.config();
 
@@ -19,6 +20,7 @@ mongoose.connect(process.env.MONGODB_URI, { useNewUrlParser: true, useUnifiedTop
     .catch(err => console.error('MongoDB connection error:', err));
 
 app.use('/api/auth', authRoutes);
+app.use(newsRouter);
 
 const PORT = process.env.PORT || 3000;
 app.listen(PORT, () => {
