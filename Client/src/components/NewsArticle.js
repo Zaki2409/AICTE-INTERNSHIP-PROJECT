@@ -1,15 +1,16 @@
 import React from 'react';
+import './NewsArticle.css';
 
-const NewsArticle = ({ title, description, date, image, source, author, url }) => {
+const NewsArticle = ({ title, description, date, image, source }) => {
   return (
-    <div className="news-article">
-      <h2>{title}</h2>
-      <p><strong>Source:</strong> {source}</p>
-      <p><strong>Author:</strong> {author}</p>
-      <p>{description}</p>
-      <p><strong>Published on:</strong> {new Date(date).toLocaleString()}</p>
-      {image && <img src={image} alt={title} />}
-      <a href={url} target="_blank" rel="noopener noreferrer">Read more</a>
+    <div className="news-card">
+      <img src={image} alt={title} className="news-card-image" />
+      <div className="news-card-content">
+        <h3 className="news-card-title">{title}</h3>
+        <p className="news-card-description">{description}</p>
+        <small className="news-card-source">Source: {source}</small>
+        <small className="news-card-date">{new Date(date).toLocaleDateString()}</small>
+      </div>
     </div>
   );
 };

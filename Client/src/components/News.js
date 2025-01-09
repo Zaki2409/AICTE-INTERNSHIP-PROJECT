@@ -1,5 +1,6 @@
 import React, { useState, useEffect } from 'react';
 import NewsArticle from './NewsArticle';
+import './News.css';
 
 const News = () => {
   const [articles, setArticles] = useState([]);
@@ -8,11 +9,11 @@ const News = () => {
     fetch('http://localhost:3001/api/news')
       .then(response => response.json())
       .then(data => setArticles(data.articles))
-      .catch(error => console.error('Error fetching the news:', error)); // Added error handling
+      .catch(error => console.error('Error fetching the news:', error)); 
   }, []);
 
   return (
-    <div>
+    <div className="news-grid">
       {articles.map((article, index) => (
         <NewsArticle
           key={index}
