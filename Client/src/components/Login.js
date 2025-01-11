@@ -6,6 +6,7 @@ import './Login.css';
 const Login = () => {
     const [email, setEmail] = useState('');
     const [password, setPassword] = useState('');
+    const [error, setError] = useState('');
     const navigate = useNavigate();
 
     const handleLogin = async (e) => {
@@ -15,10 +16,15 @@ const Login = () => {
                 email,
                 password
             });
-            console.log(response.data);
+            const { token } = response.data;
+
+            // Save token to localStorage or secure cookies
+            localStorage.setItem('authToken', token);
+
             // Redirect to home page after successful login
             navigate('/home');
         } catch (error) {
+            setError('Invalid email or password');
             console.error(error);
         }
     };
@@ -26,6 +32,7 @@ const Login = () => {
     return (
         <div className="login-container">
             <h2>Login</h2>
+            {error && <p className="error">{error}</p>}
             <form onSubmit={handleLogin}>
                 <input
                     type="email"

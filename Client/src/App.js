@@ -1,45 +1,29 @@
 import './App.css';
 import React from 'react';
 import { BrowserRouter as Router, Route, Routes } from 'react-router-dom';
-import Navbar from './components/Navbar';
 import Home from './components/Home';
 import News from './components/News';
 import Signup from './components/Signup';
 import Login from './components/Login';
+import Navbar from './components/Navbar';
+import ProtectedRoute from './components/ProtectedRoute';
 
 function App() {
-  return (
-    <Router>
-      <Routes>
-        {/* Home Route with Navbar */}
-        <Route 
-          path="/home" 
-          element={
-            <>
-              <Navbar />
-              <Home />
-            </>
-          } 
-        />
+    return (
+        <Router>
+            <Navbar />
+            <Routes>
+                {/* Public Routes */}
+                <Route path="/login" element={<Login />} />
+                <Route path="" element={<Login />} />
+                <Route path="/signup" element={<Signup />} />
 
-        {/* News Route with Navbar */}
-        <Route 
-          path="/news" 
-          element={
-            <>
-              <Navbar />
-              <News />
-            </>
-          } 
-        />
-
-        {/* Signup and Login Routes without Navbar */}
-        <Route path="/" element={<Login />} />
-        <Route path="/signup" element={<Signup />} />
-        <Route path="/login" element={<Login />} />
-      </Routes>
-    </Router>
-  );
+                {/* Protected Routes */}
+                <Route path="/home" element={<ProtectedRoute element={<Home />} />} />
+                <Route path="/news" element={<ProtectedRoute element={<News />} />} />
+            </Routes>
+        </Router>
+    );
 }
 
 export default App;
